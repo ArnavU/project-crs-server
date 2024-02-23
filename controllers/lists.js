@@ -25,7 +25,7 @@ export const getCollegeList = async (req, res) => {
 		});
 	} catch (error) {
 		res.status(404).json({
-			message: "Internal server errro",
+			message: error.message,
 		});
 	}
 };
