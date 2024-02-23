@@ -1,3 +1,6 @@
 node_modules
 *.test.js
 Reservations.pdf
+data/.env
+*.env
+.env*
