@@ -5,6 +5,10 @@ import listRouter from './routes/lists.js'
 import cat_wise_data_router from './routes/cat_wise_data.js'
 import formDataRouter from './routes/formData.js';
 
+config({
+    path: "./.env",
+});
+
 export const app = express();
 
 // using middleware
@@ -21,6 +25,3 @@ app.use('/api/v1/lists', listRouter);
 app.use('/api/v1/colleges', cat_wise_data_router);
 app.use('/api/v1/form', formDataRouter)
 
-config({
-    path: "./data/.env",
-});
