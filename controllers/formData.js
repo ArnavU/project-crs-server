@@ -102,8 +102,19 @@ export const getCetData = async (req, res) => {
 			filteredByCollege = filteredByBranch;
 		}
 
+		const userInput = {
+			gender, category, percentile, rank, college, branch, year, round
+		}
+
+		let message = "data fetched successfully";
+		if(filteredByCollege.length === 0) {
+			message = "Cannot get results with the following query";
+		}
+
 		return res.status(200).json({
 			success: true,
+			message,
+			userInput,
 			data: filteredByCollege,
 		});
 	} catch (err) {
