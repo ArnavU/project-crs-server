@@ -18,7 +18,7 @@ export const getPdfData = async (req, res) => {
 	console.log(exam, year, round);
 
 	// Check if a file was uploaded
-	if (!req.file) {
+	if (!req.file) { 
 		return res.status(400).json({ error: "No file uploaded" });
 	}
 

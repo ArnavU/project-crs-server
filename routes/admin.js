@@ -9,7 +9,7 @@ const storage = multer.diskStorage({
       cb(null, "uploads/");
     },
     filename: function (req, file, cb) {
-      cb(null, file.originalname);
+      cb(null, "cutoffPdf.pdf");
     },
   });
 
@@ -18,3 +18,4 @@ const upload = multer({ storage: storage });
 router.post("/pdf/:exam/:year/:round", upload.single("pdfFile"), getPdfData);
 
 export default router;
+ 
