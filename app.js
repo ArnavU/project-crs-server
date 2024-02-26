@@ -4,6 +4,8 @@ import cors from "cors";
 import listRouter from './routes/lists.js'
 import cat_wise_data_router from './routes/cat_wise_data.js'
 import formDataRouter from './routes/formData.js';
+import adminRouter from './routes/admin.js'
+import pdfRouter from './routes/pdf.js';
 
 config({
     path: "./.env",
@@ -24,4 +26,6 @@ app.use(cors({
 app.use('/api/v1/lists', listRouter);
 app.use('/api/v1/colleges', cat_wise_data_router);
 app.use('/api/v1/form', formDataRouter)
+app.use('/api/v1/pdf', pdfRouter);
 
+app.use('/api/v1/admin', adminRouter);

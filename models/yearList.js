@@ -6,7 +6,7 @@ const yearListSchema = new mongoose.Schema({
 		required: true,
 	},
 	yearList: {
-		type: [{ type: mongoose.Schema.Types.Mixed }],
+		type: mongoose.Schema.Types.Mixed ,
 		required: true,
 	},
 });
