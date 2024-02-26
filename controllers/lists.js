@@ -2,10 +2,32 @@ import { CetModel } from "../models/cet.js";
 import { SeatType } from "../models/seatType.js";
 import { YearList } from "../models/yearList.js";
 
+
+// get latest year and round from YearList
+const getLatestYearAndRound = () => {
+	return new Promise(async (res, rej) => {
+		const response = await fetch(`https://project-crs-server-1.onrender.com/api/v1/lists/yearlist/mht-cet`);
+		const data = await response.json();
+
+		let year = Number.MIN_VALUE;
+		for(let key in data.data) {
+			if(key > year) {
+				year = key;
+			}
+		}
+
+		res(year);
+	})
+}
+
 // ############################ Route Controller ############################
 export const getCollegeList = async (req, res) => {
 	try {
-		const data = await CetModel.findOne({ year: 2022, round: 1 });
+		const latestYear = await getLatestYearAndRound();
+		console.log("Year data")
+		console.log(latestYear);
+
+		const data = await CetModel.findOne({ year: latestYear, round: 1 });
 
 		const collegeArray = data.data
 			.map((obj) => {
@@ -32,7 +54,8 @@ export const getCollegeList = async (req, res) => {
 
 // ############################ Route Controller ############################
 export const getBranchList = async (req, res) => {
-	const data = await CetModel.findOne({ year: 2022, round: 1 });
+	const latestYear = await getLatestYearAndRound();
+	const data = await CetModel.findOne({ year: latestYear, round: 1 });
 
 	const branches = data.data
 		.map((obj) => {
