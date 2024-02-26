@@ -1,7 +1,7 @@
 import { exec } from 'child_process';
 
 // Path to the Python script
-const pythonScriptPath = './controllers/main.py';
+const pythonScriptPath = 'main.py';
 
 // Function to run the Python script and return a promise
 export const runPythonMain = () => {

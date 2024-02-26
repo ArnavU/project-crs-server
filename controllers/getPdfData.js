@@ -34,12 +34,12 @@ export const getPdfData = async (req, res) => {
 
 	// ########################## Convert pdf to excel ################################
 	// 1st install dependencies
-	try {
-		await installDependencies();
-		console.log("Dependencies installed");
-	} catch (err) {
-		console.log("Error installing dependencies: ", err);
-	}
+	// try {
+	// 	await installDependencies();
+	// 	console.log("Dependencies installed");
+	// } catch (err) {
+	// 	console.log("Error installing dependencies: ", err);
+	// }
 
 	// run the python script to convert pdf to xlsx
 	try {

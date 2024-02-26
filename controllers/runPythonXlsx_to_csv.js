@@ -1,7 +1,7 @@
 import { exec } from 'child_process';
 
 // Path to the Python script
-const pythonScriptPath = './controllers/xlsx_to_csv.py';
+const pythonScriptPath = 'xlsx_to_csv.py';
 
 export const runPythonXlsx_to_csv = async() => {
   return new Promise((resolve, reject) => {

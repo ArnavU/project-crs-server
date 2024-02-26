@@ -1,7 +1,7 @@
 import { exec } from "child_process";
 
 // Define the path to the requirements.txt file
-const requirementsPath = "./controllers/requirements.txt";
+const requirementsPath = "requirements.txt";
 
 // Install Python dependencies using pip
 export const installDependencies = () => {
