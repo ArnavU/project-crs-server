@@ -10,7 +10,7 @@ router.get('/branches/cet', getBranchList);
 router.get('/seatTypes/:examType/:year', getSeatTypeList);
 router.get('/categories/:examType/:year', getCategoryList);
 router.get('/yearList/:examType', getYearList);
-router.get('/pdfList/:year', getAllPdfs);
+router.get('/pdfList/:year/:round', getAllPdfs);
 
 
 // debug route
