@@ -1,5 +1,7 @@
 import { createReadStream } from "fs";
 import csv from "csv-parser";
+import {getCollege_university_mapping} from './college_university_mapping.js';
+import { getCollegeUrlMapping } from "./getCollegeUrlMapping.js";
 
 // Path to the CSV file
 const csvFilePath = "./uploads/cutoffCSV.csv";
@@ -26,11 +28,17 @@ const csvFilePath = "./uploads/cutoffCSV.csv";
 */
 
 let arrayOfObj = [];
+let universityMapping = new Map();
+let collegeUrlMapping = new Map();
 
 const insertRowIntoArray = (row) => {
     let temp = {};
     temp.college = row['College Name'];
     temp.Course = row.Course;
+
+    temp.university = universityMapping.get(temp?.college?.toLowerCase());
+    temp.hyperLink = collegeUrlMapping.get(temp?.college.slice(7));
+    console.log(temp.hyperLink);
 
     for(let col in row) {
         if(row[col] == '-') {
@@ -75,8 +83,25 @@ const insertRowIntoArray = (row) => {
 }
 */
 
-const fetchData = () => {
+const setUniversityMapping = async() => {
+    getCollege_university_mapping()
+    .then((res) => {
+        universityMapping = res;
+    })
+    .catch((e) => {
+        console.log("Some error occured: ", e);
+    })
+}
+
+
+const fetchData = async() => {
     arrayOfObj = [];
+
+    await setUniversityMapping();
+    collegeUrlMapping = await getCollegeUrlMapping();
+
+    console.log(universityMapping);
+
     return new Promise((res, rej) => {
         // Read the CSV file
         createReadStream(csvFilePath)

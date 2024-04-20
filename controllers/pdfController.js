@@ -7,7 +7,7 @@ export const deletePdf = async (req, res) => {
 	let { year, round, exam, name } = req.params;
 
 	try {
-		const cetDocDel = await CetModel.deleteOne({
+		const cetDocDel = await CetModel.deleteMany({
 			year: year,
 			round: round,
 		});
@@ -19,7 +19,7 @@ export const deletePdf = async (req, res) => {
 		}
 
 		if (round == 1) {
-			const seatTypeDocDel = await SeatType.deleteOne({
+			const seatTypeDocDel = await SeatType.deleteMany({
 				year: year,
 				examType: "cet",
 			});
@@ -48,7 +48,7 @@ export const deletePdf = async (req, res) => {
 
         console.log(newDoc);
 
-		const result = await PdfModel.deleteOne({
+		const result = await PdfModel.deleteMany({
 			year: year,
 			round: round,
 			exam: exam,

@@ -6,7 +6,7 @@ import { YearList } from "../models/yearList.js";
 // get latest year and round from YearList
 const getLatestYearAndRound = () => {
 	return new Promise(async (res, rej) => {
-		const response = await fetch(`https://project-crs-server-1.onrender.com/api/v1/lists/yearlist/mht-cet`);
+		const response = await fetch(`${process.env.BASE_URI}/api/v1/lists/yearlist/mht-cet`);
 		const data = await response.json();
 
 		let year = Number.MIN_VALUE;
@@ -158,7 +158,8 @@ export const getYearList = async (req, res) => {
 // ############################ Route Controller ############################
 // debug controller
 export const getData = async(req, res) => {
-	const data = await CetModel.findOne({ year: 2022, round: 1 });
+	const {year} = req.params;
+	const data = await CetModel.findOne({ year: year, round: 1 });
 
 	res.status(200).json({
 		message: "success",

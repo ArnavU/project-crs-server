@@ -48,14 +48,20 @@ const filterByCollege = (arr, college) => {
 // ################################## Route Controller ##################################
 // '/api/v1/form/cet/:gender/:category/:percentile/:rank/:college/:branch/:year/:round'
 export const getCetData = async (req, res) => {
-	let { gender, category, percentile, rank, college, branch, year, round } =
+	let { gender, category, percentile, rank, college, branch, year, round, university } =
 		req.params;
+
+	const userInput = {
+		gender, category, percentile, rank, college, branch, year, round, university
+	}
 	percentile = Number(percentile);
 	rank = Number(rank);
 
 	try {
+		// '/api/v1/colleges/cet/:category/:gender/:year/:round/' 
+		// getAllotmentData() => controller
 		const allotmentData = await axios.get(
-			`${process.env.BASE_URI}/api/v1/colleges/cet/${category}/${gender}/${year}/${round}`
+			`${process.env.BASE_URI}/api/v1/colleges/cet/${category}/${gender}/${year}/${round}/${university}`
 		);
 
         // 1) sort data according to percentile
@@ -102,10 +108,6 @@ export const getCetData = async (req, res) => {
 			filteredByCollege = filteredByBranch;
 		}
 
-		const userInput = {
-			gender, category, percentile, rank, college, branch, year, round
-		}
-
 		let message = "data fetched successfully";
 		if(filteredByCollege.length === 0) {
 			message = "Cannot get results with the following query";
@@ -121,7 +123,8 @@ export const getCetData = async (req, res) => {
 		res.status(404).json({
 			success: false,
 			message: err.message,
+			userInput,
+			data: null
 		});
 	}
 };
-

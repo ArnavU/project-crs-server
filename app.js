@@ -6,6 +6,7 @@ import cat_wise_data_router from './routes/cat_wise_data.js'
 import formDataRouter from './routes/formData.js';
 import adminRouter from './routes/admin.js'
 import pdfRouter from './routes/pdf.js';
+import collegeInfoRouter from './routes/collegeInfo.js';
 
 config({
     path: "./.env",
@@ -27,5 +28,6 @@ app.use('/api/v1/lists', listRouter);
 app.use('/api/v1/colleges', cat_wise_data_router);
 app.use('/api/v1/form', formDataRouter)
 app.use('/api/v1/pdf', pdfRouter);
+app.use('/api/v1/additionalInfo', collegeInfoRouter);
 
 app.use('/api/v1/admin', adminRouter);

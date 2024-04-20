@@ -93,7 +93,11 @@ export const getPdfData = async (req, res) => {
 	// modify yearList
 	// modify the yearList document
 	try {
-		const yearList = await YearList.findOne({ examType: "mht-cet" });
+		let yearList = await YearList.findOne({ examType: "mht-cet" });
+		// if document is not created initially then create
+		if(!yearList) {
+			yearList = await YearList.create({examType: "mht-cet", yearList: {}});
+		}
 		console.log(yearList);
 
 		const yearListObj = yearList.yearList;
@@ -120,7 +124,11 @@ export const getPdfData = async (req, res) => {
 			success: false,
 			message: "Cound not update yearList",
 		});
+		return;
+		// if the return statement is not there then the below code will also run because there is no Throw
+		// either throw or return is necessary
 	}
 
 	res.status(200).json({ message: "File uploaded successfully" });
+	return;
 };
