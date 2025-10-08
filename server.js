@@ -9,6 +9,7 @@ cron.schedule('* * * * *', () => {
 });
 
 app.get('/', (req, res) => {
+    console.log("API is working fine.");
     res.send('Welcome to the API CRS(College Recommendation System). Made with love by Arnav Umarkar.');
 });
 
