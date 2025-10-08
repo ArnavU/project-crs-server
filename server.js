@@ -1,12 +1,7 @@
 import { app } from "./app.js"; 
 import { connectDB } from "./data/database.js";
-import cron from 'node-cron';
 
 connectDB();
-
-cron.schedule('* * * * *', () => {
-  console.log('Running an empty task every minute'); // to keep the server alive
-});
 
 app.get('/', (req, res) => {
     console.log("API is working fine.");
